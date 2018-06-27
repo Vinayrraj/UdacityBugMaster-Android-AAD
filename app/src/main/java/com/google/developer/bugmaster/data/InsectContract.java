@@ -5,6 +5,23 @@ import android.provider.BaseColumns;
 
 public class InsectContract {
 
+    /*
+     * The columns of data that we are interested in displaying within our MainActivity's list of
+     * weather data.
+     */
+    public static final String[] MAIN_FORECAST_PROJECTION = {
+            WeatherEntry._ID,
+            WeatherEntry.COLUMN_FRIENDLY_NAME,
+            WeatherEntry.COLUMN_SCIENTIFIC_NAME,
+            WeatherEntry.COLUMN_DANGER_LEVEL
+    };
+    public interface ProjectionIndex{
+        public int INDEX_ID = 0;
+        public int INDEX_FRIENDLY_NAME = 1;
+        public int INDEX_SCIENTIFIC_NAME = 2;
+        public int INDEX_DANGER_LEVEL = 3;
+    }
+
     public static final String CONTENT_AUTHORITY = "com.google.developer.bugmaster";
 
     public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);

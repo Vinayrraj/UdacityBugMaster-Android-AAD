@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.google.developer.bugmaster.R;
-import com.google.developer.bugmaster.data.InsectContract.WeatherEntry;
+import com.google.developer.bugmaster.data.InsectContract.InsectEntry;
 import com.google.developer.bugmaster.util.AppExecutors;
 import com.google.gson.Gson;
 
@@ -44,15 +44,15 @@ public class BugsDbHelper extends SQLiteOpenHelper {
 
         final String SQL_CREATE_WEATHER_TABLE =
 
-                "CREATE TABLE " + WeatherEntry.TABLE_NAME + " (" +
+                "CREATE TABLE " + InsectEntry.TABLE_NAME + " (" +
 
-                        WeatherEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        WeatherEntry.COLUMN_FRIENDLY_NAME + " TEXT NOT NULL, " +
-                        WeatherEntry.COLUMN_SCIENTIFIC_NAME + " TEXT NOT NULL," +
-                        WeatherEntry.COLUMN_CLASSIFICATION + " TEXT NOT NULL, " +
-                        WeatherEntry.COLUMN_IMAGE_ASSET + " TEXT NOT NULL, " +
-                        WeatherEntry.COLUMN_DANGER_LEVEL + " INTEGER NOT NULL, " +
-                        " UNIQUE (" + WeatherEntry.COLUMN_SCIENTIFIC_NAME + ") ON CONFLICT REPLACE);";
+                        InsectEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        InsectEntry.COLUMN_FRIENDLY_NAME + " TEXT NOT NULL, " +
+                        InsectEntry.COLUMN_SCIENTIFIC_NAME + " TEXT NOT NULL," +
+                        InsectEntry.COLUMN_CLASSIFICATION + " TEXT NOT NULL, " +
+                        InsectEntry.COLUMN_IMAGE_ASSET + " TEXT NOT NULL, " +
+                        InsectEntry.COLUMN_DANGER_LEVEL + " INTEGER NOT NULL, " +
+                        " UNIQUE (" + InsectEntry.COLUMN_SCIENTIFIC_NAME + ") ON CONFLICT REPLACE);";
 
 
         sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_TABLE);
@@ -107,11 +107,11 @@ public class BugsDbHelper extends SQLiteOpenHelper {
             for (int index = 0; index < collection.insects.size(); index++) {
                 Insect data = collection.insects.get(index);
                 ContentValues weatherValues = new ContentValues();
-                weatherValues.put(WeatherEntry.COLUMN_FRIENDLY_NAME, data.name);
-                weatherValues.put(WeatherEntry.COLUMN_SCIENTIFIC_NAME, data.scientificName);
-                weatherValues.put(WeatherEntry.COLUMN_CLASSIFICATION, data.classification);
-                weatherValues.put(WeatherEntry.COLUMN_IMAGE_ASSET, data.imageAsset);
-                weatherValues.put(WeatherEntry.COLUMN_DANGER_LEVEL, data.dangerLevel);
+                weatherValues.put(InsectEntry.COLUMN_FRIENDLY_NAME, data.name);
+                weatherValues.put(InsectEntry.COLUMN_SCIENTIFIC_NAME, data.scientificName);
+                weatherValues.put(InsectEntry.COLUMN_CLASSIFICATION, data.classification);
+                weatherValues.put(InsectEntry.COLUMN_IMAGE_ASSET, data.imageAsset);
+                weatherValues.put(InsectEntry.COLUMN_DANGER_LEVEL, data.dangerLevel);
 
                 weatherContentValues[index] = weatherValues;
             }
@@ -119,7 +119,7 @@ public class BugsDbHelper extends SQLiteOpenHelper {
 
             ContentResolver sunshineContentResolver = mContext.getContentResolver();
             sunshineContentResolver.bulkInsert(
-                    WeatherEntry.CONTENT_URI,
+                    InsectEntry.CONTENT_URI,
                     weatherContentValues);
         }
     }

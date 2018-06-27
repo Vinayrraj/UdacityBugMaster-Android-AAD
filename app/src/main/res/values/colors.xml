@@ -9,6 +9,7 @@
     <color name="colorCorrect">#4CAF50</color>
 
     <color name="dangerColor_text">#FFFFFF</color>
+    <color name="image_bg">#7986CB</color>
 
     <!-- Danger Value Colors -->
     <string-array name="dangerColors">

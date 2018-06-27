@@ -34,7 +34,7 @@ public class DatabaseManager {
         int rowsInserted = 0;
         try {
             for (ContentValues value : values) {
-                long _id = db.insert(InsectContract.WeatherEntry.TABLE_NAME, null, value);
+                long _id = db.insert(InsectContract.InsectEntry.TABLE_NAME, null, value);
                 if (_id != -1) {
                     rowsInserted++;
                 }
@@ -53,7 +53,7 @@ public class DatabaseManager {
 
     public Cursor queryAllInsects(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
         return mBugsDbHelper.getReadableDatabase().query(
-                InsectContract.WeatherEntry.TABLE_NAME,
+                InsectContract.InsectEntry.TABLE_NAME,
                 projection,
                 selection,
                 selectionArgs,
@@ -65,9 +65,9 @@ public class DatabaseManager {
 
     public Cursor queryInsectsById(String[] projection, String[] selectionArgs) {
         return mBugsDbHelper.getReadableDatabase().query(
-                InsectContract.WeatherEntry.TABLE_NAME,
+                InsectContract.InsectEntry.TABLE_NAME,
                 projection,
-                InsectContract.WeatherEntry._ID + " = ? ",
+                InsectContract.InsectEntry._ID + " = ? ",
                 selectionArgs,
                 null,
                 null,

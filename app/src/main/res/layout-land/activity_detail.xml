@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.google.developer.bugmaster.InsectDetailsActivity">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/image_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            layout="@layout/detail_image_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="71dp" />
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/detail_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <include
+            layout="@layout/detail_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="71dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</android.support.constraint.ConstraintLayout>

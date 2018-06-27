@@ -23,7 +23,7 @@ import android.view.View;
 import com.google.developer.bugmaster.data.InsectContract;
 import com.google.developer.bugmaster.data.InsectRecyclerAdapter;
 
-import static com.google.developer.bugmaster.data.InsectContract.MAIN_FORECAST_PROJECTION;
+import static com.google.developer.bugmaster.data.InsectContract.MAIN_INSECTS_PROJECTION;
 
 public class MainActivity extends AppCompatActivity implements
         View.OnClickListener,
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements
         mForecastAdapter = new InsectRecyclerAdapter(this, this);
         mRecyclerView.setAdapter(mForecastAdapter);
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mSortOrder = mSharedPreferences.getString(SORT_QUERY, InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME);
+        mSortOrder = mSharedPreferences.getString(SORT_QUERY, InsectContract.InsectEntry.COLUMN_FRIENDLY_NAME);
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(SORT_QUERY)) {
                 mSortOrder = savedInstanceState.getString(SORT_QUERY);
@@ -75,10 +75,10 @@ public class MainActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             case R.id.action_sort:
                 //TODO: Implement the sort action
-                if (mSortOrder.equals(InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME)) {
-                    mSortOrder = InsectContract.WeatherEntry.COLUMN_DANGER_LEVEL;
+                if (mSortOrder.equals(InsectContract.InsectEntry.COLUMN_FRIENDLY_NAME)) {
+                    mSortOrder = InsectContract.InsectEntry.COLUMN_DANGER_LEVEL;
                 } else {
-                    mSortOrder = InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME;
+                    mSortOrder = InsectContract.InsectEntry.COLUMN_FRIENDLY_NAME;
                 }
                 mSharedPreferences.edit().putString(SORT_QUERY, mSortOrder).commit();
                 getSupportLoaderManager().restartLoader(ID_INSECTS_LOADER, null, this);
@@ -116,18 +116,18 @@ public class MainActivity extends AppCompatActivity implements
 
             case ID_INSECTS_LOADER:
                 /* URI for all rows of weather data in our weather table */
-                Uri forecastQueryUri = InsectContract.WeatherEntry.CONTENT_URI;
+                Uri forecastQueryUri = InsectContract.InsectEntry.CONTENT_URI;
                 String sortOrder = null;
 
-                if (mSortOrder.equals(InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME)) {
-                    sortOrder = InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME + " ASC";
+                if (mSortOrder.equals(InsectContract.InsectEntry.COLUMN_FRIENDLY_NAME)) {
+                    sortOrder = InsectContract.InsectEntry.COLUMN_FRIENDLY_NAME + " ASC";
                 } else {
-                    sortOrder = InsectContract.WeatherEntry.COLUMN_DANGER_LEVEL + " DESC";
+                    sortOrder = InsectContract.InsectEntry.COLUMN_DANGER_LEVEL + " DESC";
                 }
 
                 return new CursorLoader(this,
                         forecastQueryUri,
-                        MAIN_FORECAST_PROJECTION,
+                        MAIN_INSECTS_PROJECTION,
                         null,
                         null,
                         sortOrder);

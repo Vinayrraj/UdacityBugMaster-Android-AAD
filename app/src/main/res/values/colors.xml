@@ -8,6 +8,8 @@
     <color name="colorWrong">#F44336</color>
     <color name="colorCorrect">#4CAF50</color>
 
+    <color name="dangerColor_text">#FFFFFF</color>
+
     <!-- Danger Value Colors -->
     <string-array name="dangerColors">
         <!-- level=1 -->

@@ -4,7 +4,9 @@
     <shared>
       <config>
         <devices>
+          <device id="Nexus One" />
           <device id="Nexus 5" />
+          <device id="Nexus 10" />
         </devices>
       </config>
     </shared>
@@ -79,8 +81,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state relative-caret-position="510">
+              <caret line="42" column="37" lean-forward="false" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,6 +107,7 @@
       <find>settings</find>
       <find>mOpenHelper</find>
       <find>prec</find>
+      <find>activity_horizontal_margin</find>
     </findStrings>
     <replaceStrings>
       <replace>27.0.3</replace>
@@ -1997,13 +2000,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/data/InsectRecyclerAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/list_item_insect.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/views/DangerLevelView.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/drawable/ic_av_timer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/QuizActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/InsectDetailsActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/data/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/data/InsectProvider.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-w820dp/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml" />
       </list>
     </option>
   </component>
@@ -2120,6 +2126,11 @@
     <property name="DEBUGGABLE_PROCESS" value="com.google.developer.bugmaster" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="DEBUGGER_ID" value="Auto" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\udacity\android\aad-BugMasterExam\app\src\main\res\layout-land" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -2342,14 +2353,6 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/MainActivity.java</url>
-          <line>121</line>
-          <properties />
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="11" />
     </breakpoint-manager>
     <watches-manager />
@@ -2451,30 +2454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_insect.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="64" lean-forward="false" selection-start-line="18" selection-start-column="64" selection-end-line="18" selection-end-column="64" />
-          <folding>
-            <element signature="e#475#510#0" expanded="false" />
-            <element signature="e#535#572#0" expanded="false" />
-            <element signature="e#598#635#0" expanded="false" />
-            <element signature="e#659#694#0" expanded="false" />
-            <element signature="e#925#953#0" expanded="false" />
-            <element signature="e#987#1015#0" expanded="false" />
-            <element signature="e#1584#1620#0" expanded="false" />
-            <element signature="e#1656#1694#0" expanded="false" />
-            <element signature="e#1728#1764#0" expanded="false" />
-            <element signature="e#2337#2373#0" expanded="false" />
-            <element signature="e#2407#2443#0" expanded="false" />
-            <element signature="e#2477#2513#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/data/InsectRecyclerAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="516">
@@ -2524,17 +2503,6 @@
           <caret line="2775" column="0" lean-forward="false" selection-start-line="2775" selection-start-column="0" selection-end-line="2775" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="37" lean-forward="false" selection-start-line="36" selection-start-column="37" selection-end-line="36" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
@@ -2623,10 +2591,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/list_item_insect.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-227">
+          <caret line="1" column="103" lean-forward="true" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="103" />
+          <folding>
+            <element signature="e#925#953#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout-land/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="30" column="47" lean-forward="false" selection-start-line="30" selection-start-column="47" selection-end-line="30" selection-end-column="47" />
+          <folding>
+            <element signature="e#1206#1246#0" expanded="true" />
+            <element signature="e#1475#1511#0" expanded="true" />
+            <element signature="e#2091#2126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="48" lean-forward="false" selection-start-line="16" selection-start-column="48" selection-end-line="16" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values-w820dp/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="47" lean-forward="false" selection-start-line="8" selection-start-column="47" selection-end-line="8" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="44" lean-forward="false" selection-start-line="26" selection-start-column="44" selection-end-line="26" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/google/developer/bugmaster/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="121" column="0" lean-forward="false" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+        <state relative-caret-position="510">
+          <caret line="42" column="37" lean-forward="false" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

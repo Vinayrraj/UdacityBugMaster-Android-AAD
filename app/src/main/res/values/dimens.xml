@@ -13,4 +13,7 @@
     <dimen name="margin_common_name_horizontal">16dp</dimen>
     <dimen name="margin_common_name_vertical">8dp</dimen>
     <dimen name="margin_danger_level_start">8dp</dimen>
+
+    <dimen name="margin_list_land_horizontal">100dp</dimen>
+
 </resources>

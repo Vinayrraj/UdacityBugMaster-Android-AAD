@@ -15,5 +15,6 @@
     <dimen name="margin_danger_level_start">8dp</dimen>
 
     <dimen name="margin_list_land_horizontal">100dp</dimen>
+    <dimen name="image_height">200dp</dimen>
 
 </resources>

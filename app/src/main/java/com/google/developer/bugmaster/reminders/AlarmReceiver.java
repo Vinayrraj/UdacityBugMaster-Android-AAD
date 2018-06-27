@@ -14,6 +14,7 @@ import com.google.developer.bugmaster.R;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 public class AlarmReceiver extends BroadcastReceiver {
@@ -47,6 +48,12 @@ public class AlarmReceiver extends BroadcastReceiver {
             Calendar startTime = Calendar.getInstance();
             try {
                 String alarmPref = preferences.getString(keyAlarm, "12:00");
+                startTime.setTimeInMillis(new Date().getTime());
+                String hours = alarmPref.substring(0, 2);
+                startTime.set(Calendar.HOUR_OF_DAY, Integer.valueOf(hours));
+                startTime.set(Calendar.MINUTE, Integer.valueOf(0));
+                startTime.set(Calendar.SECOND, 0);
+
                 SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
                 startTime.setTime(format.parse(alarmPref));
             } catch (ParseException e) {

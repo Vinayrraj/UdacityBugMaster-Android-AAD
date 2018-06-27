@@ -23,7 +23,11 @@
         <activity
             android:name=".QuizActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".InsectDetailsActivity"
             android:exported="false"

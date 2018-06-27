@@ -9,6 +9,7 @@ import com.google.developer.bugmaster.data.Insect;
 import com.google.developer.bugmaster.views.AnswerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class QuizActivity extends AppCompatActivity implements
@@ -20,6 +21,7 @@ public class QuizActivity extends AppCompatActivity implements
 
     public static final String EXTRA_INSECTS = "insectList";
     public static final String EXTRA_ANSWER = "selectedInsect";
+    public static final String EXTRA_USER_SELECTION = "user_selection";
 
     private TextView mQuestionText;
     private TextView mCorrectText;
@@ -38,7 +40,22 @@ public class QuizActivity extends AppCompatActivity implements
 
         List<Insect> insects = getIntent().getParcelableArrayListExtra(EXTRA_INSECTS);
         Insect selected = getIntent().getParcelableExtra(EXTRA_ANSWER);
-        buildQuestion(insects, selected);
+
+        List<Insect> questionSet = insects.subList(0, ANSWER_COUNT - 1);
+        questionSet.add(selected);
+        Collections.shuffle(questionSet);
+        buildQuestion(questionSet, selected);
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(EXTRA_USER_SELECTION)) {
+            Integer selectedIndex = savedInstanceState.getInt(EXTRA_USER_SELECTION);
+            mAnswerSelect.setCheckedIndex(selectedIndex);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(EXTRA_USER_SELECTION, mAnswerSelect.getCheckedIndex());
+        super.onSaveInstanceState(outState);
     }
 
     private void buildQuestion(List<Insect> insects, Insect selected) {
@@ -51,7 +68,7 @@ public class QuizActivity extends AppCompatActivity implements
             options.add(item.scientificName);
         }
 
-        mAnswerSelect.loadAnswers(options, selected.name);
+        mAnswerSelect.loadAnswers(options, selected.scientificName);
     }
 
     /* Answer Selection Callbacks */

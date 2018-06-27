@@ -45,11 +45,11 @@ public final class Insect implements Parcelable {
      */
     public Insect(Cursor cursor) {
         //TODO: Create a new insect from cursor
-        this.name = null;
-        this.scientificName = null;
+        this.name = cursor.getString(InsectContract.ProjectionIndex.INDEX_FRIENDLY_NAME);
+        this.scientificName = cursor.getString(InsectContract.ProjectionIndex.INDEX_SCIENTIFIC_NAME);
+        this.dangerLevel = cursor.getInt(InsectContract.ProjectionIndex.INDEX_DANGER_LEVEL);
         this.classification = null;
         this.imageAsset = null;
-        this.dangerLevel = -1;
     }
 
     /**

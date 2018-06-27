@@ -61,7 +61,7 @@ public class AlarmReceiver extends BroadcastReceiver {
             }
 
             Log.d(TAG, "Scheduling quiz reminder alarm");
-            manager.setExact(AlarmManager.RTC, startTime.getTimeInMillis(), operation);
+            manager.setExact(AlarmManager.RTC_WAKEUP, startTime.getTimeInMillis(), operation);
         } else {
             Log.d(TAG, "Disabling quiz reminder alarm");
             manager.cancel(operation);

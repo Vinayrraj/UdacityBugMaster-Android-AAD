@@ -20,9 +20,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.developer.bugmaster.data.Insect;
 import com.google.developer.bugmaster.data.InsectContract;
 import com.google.developer.bugmaster.data.InsectRecyclerAdapter;
+import com.google.developer.bugmaster.reminders.ReminderService;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
+import static com.google.developer.bugmaster.QuizActivity.EXTRA_ANSWER;
+import static com.google.developer.bugmaster.QuizActivity.EXTRA_INSECTS;
 import static com.google.developer.bugmaster.data.InsectContract.MAIN_INSECTS_PROJECTION;
 
 public class MainActivity extends AppCompatActivity implements
@@ -36,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private SharedPreferences mSharedPreferences;
     private InsectRecyclerAdapter mForecastAdapter;
+    private ArrayList<Insect> mRandomInsectList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         getSupportLoaderManager().initLoader(ID_INSECTS_LOADER, null, this);
+
+        Intent i = new Intent(this, ReminderService.class);
+        startService(i);
     }
 
 
@@ -99,7 +111,10 @@ public class MainActivity extends AppCompatActivity implements
         //TODO: Launch the quiz activity
         switch (v.getId()) {
             case R.id.fab:
-                startActivity(new Intent(this, QuizActivity.class));
+                Intent quizIntent = new Intent(this, QuizActivity.class);
+                quizIntent.putParcelableArrayListExtra(EXTRA_INSECTS, mRandomInsectList);
+                quizIntent.putExtra(EXTRA_ANSWER, mRandomInsectList.get(new Random().nextInt(mRandomInsectList.size())));
+                startActivity(quizIntent);
                 break;
 
 
@@ -140,6 +155,23 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor cursor) {
         mForecastAdapter.swapCursor(cursor);
+        fillList(cursor);
+    }
+
+    private void fillList(Cursor cursor) {
+        ArrayList<Insect> tempList = new ArrayList<>();
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                Insect insect = new Insect(cursor);
+                tempList.add(insect);
+            } while (cursor.moveToNext());
+            Collections.shuffle(tempList);
+            mRandomInsectList = tempList;
+        } else {
+            mRandomInsectList.clear();
+        }
+
     }
 
     @Override

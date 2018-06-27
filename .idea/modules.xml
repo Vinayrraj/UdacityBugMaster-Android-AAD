@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/aad-BugMasterExam.iml" filepath="$PROJECT_DIR$/aad-BugMasterExam.iml" />
+      <module fileurl="file://$PROJECT_DIR$/UdacityBugMaster-Android-AAD.iml" filepath="$PROJECT_DIR$/UdacityBugMaster-Android-AAD.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

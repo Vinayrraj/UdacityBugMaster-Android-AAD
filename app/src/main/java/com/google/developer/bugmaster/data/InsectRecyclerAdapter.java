@@ -7,10 +7,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.developer.bugmaster.R;
+import com.google.developer.bugmaster.views.DangerLevelView;
 
 /**
  * RecyclerView adapter extended with project-specific required methods.
@@ -44,6 +44,9 @@ public class InsectRecyclerAdapter extends
     public void onBindViewHolder(InsectHolder holder, int position) {
         mCursor.moveToPosition(position);
 
+        holder.dangerLevelView.setDangerLevel(mCursor.getInt(InsectContract.ProjectionIndex.INDEX_DANGER_LEVEL));
+        holder.commonNameView.setText(mCursor.getString(InsectContract.ProjectionIndex.INDEX_FRIENDLY_NAME));
+        holder.scientificNameView.setText(mCursor.getString(InsectContract.ProjectionIndex.INDEX_SCIENTIFIC_NAME));
 
     }
 
@@ -77,14 +80,15 @@ public class InsectRecyclerAdapter extends
     /* ViewHolder for each insect item */
     public class InsectHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-//        final ImageView iconView;
-//
-//        final TextView dateView;
+        final DangerLevelView dangerLevelView;
+        final TextView commonNameView;
+        final TextView scientificNameView;
 
         public InsectHolder(View view) {
             super(view);
-//            iconView = (ImageView) view.findViewById(R.id.weather_icon);
-//            dateView = (TextView) view.findViewById(R.id.date);
+            dangerLevelView = (DangerLevelView) view.findViewById(R.id.danger_level_view);
+            commonNameView = (TextView) view.findViewById(R.id.common_name_tv);
+            scientificNameView = (TextView) view.findViewById(R.id.scientific_name_tv);
             view.setOnClickListener(this);
         }
 

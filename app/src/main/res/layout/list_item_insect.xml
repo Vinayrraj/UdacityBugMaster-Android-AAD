@@ -12,8 +12,46 @@
     android:paddingTop="@dimen/list_item_padding_vertical">
 
 
-    
+    <com.google.developer.bugmaster.views.DangerLevelView
+        android:id="@+id/danger_level_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_danger_level"
+        android:layout_marginStart="@dimen/margin_danger_level"
+        android:layout_marginTop="@dimen/margin_danger_level"
+        android:textColor="@color/dangerColor_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
 
+    <TextView
+        android:id="@+id/common_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_common_name_vertical"
+        android:layout_marginStart="@dimen/margin_common_name_horizontal"
+        android:layout_marginTop="@dimen/margin_common_name_vertical"
+        android:textAppearance="?android:textAppearanceLarge"
+        app:layout_constraintBottom_toTopOf="@+id/scientific_name_tv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/danger_level_view"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Common Name" />
 
-
+    <TextView
+        android:id="@+id/scientific_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_common_name_vertical"
+        android:layout_marginEnd="@dimen/margin_common_name_vertical"
+        android:layout_marginTop="@dimen/margin_common_name_vertical"
+        android:textAppearance="?android:textAppearanceMedium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/common_name_tv"
+        app:layout_constraintTop_toBottomOf="@+id/common_name_tv"
+        tools:text="Scientific Name" />
 </android.support.constraint.ConstraintLayout>

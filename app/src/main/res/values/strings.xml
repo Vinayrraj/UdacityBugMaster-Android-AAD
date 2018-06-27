@@ -16,4 +16,6 @@
 
     <string name="pref_key_reminder" translatable="false">key_reminder</string>
     <string name="pref_key_alarm" translatable="false">key_alarm</string>
+
+    <string name="content_authority">com.google.developer.bugmaster</string>
 </resources>

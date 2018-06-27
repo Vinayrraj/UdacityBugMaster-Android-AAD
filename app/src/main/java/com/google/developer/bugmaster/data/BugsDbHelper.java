@@ -11,7 +11,6 @@ import com.google.developer.bugmaster.R;
 import com.google.developer.bugmaster.data.InsectContract.WeatherEntry;
 import com.google.developer.bugmaster.util.AppExecutors;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 
@@ -99,15 +98,29 @@ public class BugsDbHelper extends SQLiteOpenHelper {
 
         //Parse resource into key/values
         final String rawJson = builder.toString();
-        ContentValues[] weatherValues = new Gson().fromJson(rawJson, new TypeToken<ContentValues[]>() {
-        }.getType());
+        InsectsCollection collection = new Gson().fromJson(rawJson, InsectsCollection.class);
 
-        if (weatherValues != null && weatherValues.length != 0) {
+        if (collection != null && collection.insects != null && !collection.insects.isEmpty()) {
+            ContentValues[] weatherContentValues = new ContentValues[collection.insects.size()];
+
+
+            for (int index = 0; index < collection.insects.size(); index++) {
+                Insect data = collection.insects.get(index);
+                ContentValues weatherValues = new ContentValues();
+                weatherValues.put(WeatherEntry.COLUMN_FRIENDLY_NAME, data.name);
+                weatherValues.put(WeatherEntry.COLUMN_SCIENTIFIC_NAME, data.scientificName);
+                weatherValues.put(WeatherEntry.COLUMN_CLASSIFICATION, data.classification);
+                weatherValues.put(WeatherEntry.COLUMN_IMAGE_ASSET, data.imageAsset);
+                weatherValues.put(WeatherEntry.COLUMN_DANGER_LEVEL, data.dangerLevel);
+
+                weatherContentValues[index] = weatherValues;
+            }
+
+
             ContentResolver sunshineContentResolver = mContext.getContentResolver();
-
             sunshineContentResolver.bulkInsert(
                     WeatherEntry.CONTENT_URI,
-                    weatherValues);
+                    weatherContentValues);
         }
     }
 }

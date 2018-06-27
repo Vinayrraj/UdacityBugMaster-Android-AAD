@@ -37,6 +37,12 @@
             android:name=".reminders.ReminderService"
             android:exported="false"/>
 
+        <!-- Our ContentProvider -->
+        <provider
+            android:name=".data.InsectProvider"
+            android:authorities="@string/content_authority"
+            android:exported="false"/>
+
         <receiver
             android:name=".reminders.AlarmReceiver"
             android:enabled="true"

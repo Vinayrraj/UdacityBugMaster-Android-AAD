@@ -4,18 +4,29 @@ import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public final class Insect implements Parcelable {
     private static final String TAG = Insect.class.getSimpleName();
 
     //Common name
+    @SerializedName("friendlyName")
     public final String name;
+
     //Latin scientific name
+    @SerializedName("scientificName")
     public final String scientificName;
+
     //Classification order
+    @SerializedName("classification")
     public final String classification;
+
     //Path to image resource
+    @SerializedName("imageAsset")
     public final String imageAsset;
+
     //1-10 scale danger to humans
+    @SerializedName("dangerLevel")
     public final int dangerLevel;
 
     /**

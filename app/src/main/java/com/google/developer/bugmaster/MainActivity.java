@@ -12,7 +12,6 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -91,6 +90,15 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onClick(View v) {
         //TODO: Launch the quiz activity
+        switch (v.getId()) {
+            case R.id.fab:
+                startActivity(new Intent(this, QuizActivity.class));
+                break;
+
+
+            default:
+
+        }
     }
 
     @Override

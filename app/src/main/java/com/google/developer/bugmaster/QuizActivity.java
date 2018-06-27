@@ -1,6 +1,7 @@
 package com.google.developer.bugmaster;
 
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
@@ -67,7 +68,7 @@ public class QuizActivity extends AppCompatActivity implements
 
     private void updateResultText() {
         mCorrectText.setTextColor(mAnswerSelect.isCorrectAnswerSelected() ?
-                getColor(R.color.colorCorrect) : getColor( R.color.colorWrong)
+                ContextCompat.getColor(getBaseContext(), R.color.colorCorrect) : ContextCompat.getColor(getBaseContext(), R.color.colorWrong)
         );
         mCorrectText.setText(mAnswerSelect.isCorrectAnswerSelected() ?
                 R.string.answer_correct : R.string.answer_wrong

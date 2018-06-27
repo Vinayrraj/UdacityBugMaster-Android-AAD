@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -27,10 +28,10 @@ import static com.google.developer.bugmaster.data.InsectContract.MAIN_FORECAST_P
 public class MainActivity extends AppCompatActivity implements
         View.OnClickListener,
         LoaderManager.LoaderCallbacks<Cursor>,
-        InsectRecyclerAdapter.InsectRecyclerAdapterOnClickHandler,
-        SharedPreferences.OnSharedPreferenceChangeListener {
+        InsectRecyclerAdapter.InsectRecyclerAdapterOnClickHandler {
 
     public static final String SORT_QUERY = "sort";
+    private String mSortOrder;
     private static final int ID_INSECTS_LOADER = 23;
 
     private SharedPreferences mSharedPreferences;
@@ -51,17 +52,15 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setLayoutManager(layoutManager);
         mForecastAdapter = new InsectRecyclerAdapter(this, this);
         mRecyclerView.setAdapter(mForecastAdapter);
-        getSupportLoaderManager().initLoader(ID_INSECTS_LOADER, null, this);
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mSortOrder = mSharedPreferences.getString(SORT_QUERY, InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME);
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(SORT_QUERY)) {
+                mSortOrder = savedInstanceState.getString(SORT_QUERY);
+            }
+        }
 
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
-//
-//        String sortOrder = mSharedPreferences.getString(SORT_QUERY, InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME);
-//        if (savedInstanceState != null) {
-//            if (savedInstanceState.containsKey(SORT_QUERY)) {
-//                sortOrder = savedInstanceState.getString(SORT_QUERY);
-//            }
-//        }
+        getSupportLoaderManager().initLoader(ID_INSECTS_LOADER, null, this);
     }
 
 
@@ -76,6 +75,14 @@ public class MainActivity extends AppCompatActivity implements
         switch (item.getItemId()) {
             case R.id.action_sort:
                 //TODO: Implement the sort action
+                if (mSortOrder.equals(InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME)) {
+                    mSortOrder = InsectContract.WeatherEntry.COLUMN_DANGER_LEVEL;
+                } else {
+                    mSortOrder = InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME;
+                }
+                mSharedPreferences.edit().putString(SORT_QUERY, mSortOrder).commit();
+                getSupportLoaderManager().restartLoader(ID_INSECTS_LOADER, null, this);
+
                 return true;
             case R.id.action_settings:
                 Intent intent = new Intent(this, SettingsActivity.class);
@@ -101,10 +108,6 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
-
-    }
 
     @NonNull
     @Override
@@ -114,8 +117,13 @@ public class MainActivity extends AppCompatActivity implements
             case ID_INSECTS_LOADER:
                 /* URI for all rows of weather data in our weather table */
                 Uri forecastQueryUri = InsectContract.WeatherEntry.CONTENT_URI;
-                String sortOrder = InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME + " ASC";
+                String sortOrder = null;
 
+                if (mSortOrder.equals(InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME)) {
+                    sortOrder = InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME + " ASC";
+                } else {
+                    sortOrder = InsectContract.WeatherEntry.COLUMN_DANGER_LEVEL + " DESC";
+                }
 
                 return new CursorLoader(this,
                         forecastQueryUri,

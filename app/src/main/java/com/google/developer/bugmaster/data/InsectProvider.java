@@ -4,7 +4,6 @@ import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -15,7 +14,7 @@ public class InsectProvider extends ContentProvider {
     public static final int CODE_INSECT_WITH_ID = 101;
 
     private static final UriMatcher sUriMatcher = buildUriMatcher();
-    private BugsDbHelper mOpenHelper;
+    private DatabaseManager mDatabaseManager;
 
     public static UriMatcher buildUriMatcher() {
 
@@ -30,46 +29,23 @@ public class InsectProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-        /*
-         * As noted in the comment above, onCreate is run on the main thread, so performing any
-         * lengthy operations will cause lag in your app. Since WeatherDbHelper's constructor is
-         * very lightweight, we are safe to perform that initialization here.
-         */
-        mOpenHelper = new BugsDbHelper(getContext());
+        mDatabaseManager = DatabaseManager.getInstance(getContext());
         return true;
     }
 
     @Override
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
-        final SQLiteDatabase db = mOpenHelper.getWritableDatabase();
 
         switch (sUriMatcher.match(uri)) {
 
             case CODE_INSECT:
-                db.beginTransaction();
-                int rowsInserted = 0;
-                try {
-                    for (ContentValues value : values) {
-                        long _id = db.insert(InsectContract.WeatherEntry.TABLE_NAME, null, value);
-                        if (_id != -1) {
-                            rowsInserted++;
-                        }
-                    }
-                    db.setTransactionSuccessful();
-                } finally {
-                    db.endTransaction();
-                }
-
-                if (rowsInserted > 0) {
-                    getContext().getContentResolver().notifyChange(uri, null);
-                }
-
-                return rowsInserted;
+                return mDatabaseManager.bulkInsert(getContext(), uri, values);
 
             default:
                 return super.bulkInsert(uri, values);
         }
     }
+
     @Override
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
@@ -83,31 +59,17 @@ public class InsectProvider extends ContentProvider {
         switch (sUriMatcher.match(uri)) {
 
             case CODE_INSECT_WITH_ID: {
-
-                String normalizedUtcDateString = uri.getLastPathSegment();
-
-                String[] selectionArguments = new String[]{normalizedUtcDateString};
-
-                cursor = mOpenHelper.getReadableDatabase().query(
-                        InsectContract.WeatherEntry.TABLE_NAME,
-                        projection,
-                        InsectContract.WeatherEntry._ID + " = ? ",
-                        selectionArguments,
-                        null,
-                        null,
-                        sortOrder);
-
+                String id = uri.getLastPathSegment();
+                String[] selectionArguments = new String[]{id};
+                cursor = mDatabaseManager.queryInsectsById(projection, selectionArguments);
                 break;
             }
 
             case CODE_INSECT: {
-                cursor = mOpenHelper.getReadableDatabase().query(
-                        InsectContract.WeatherEntry.TABLE_NAME,
+                cursor = mDatabaseManager.queryAllInsects(
                         projection,
                         selection,
                         selectionArgs,
-                        null,
-                        null,
                         sortOrder);
 
                 break;

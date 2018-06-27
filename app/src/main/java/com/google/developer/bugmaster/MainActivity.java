@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements
         SharedPreferences.OnSharedPreferenceChangeListener {
 
     public static final String SORT_QUERY = "sort";
-    private static final int ID_FORECAST_LOADER = 23;
+    private static final int ID_INSECTS_LOADER = 23;
 
     private SharedPreferences mSharedPreferences;
     private InsectRecyclerAdapter mForecastAdapter;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setLayoutManager(layoutManager);
         mForecastAdapter = new InsectRecyclerAdapter(this, this);
         mRecyclerView.setAdapter(mForecastAdapter);
-        getSupportLoaderManager().initLoader(ID_FORECAST_LOADER, null, this);
+        getSupportLoaderManager().initLoader(ID_INSECTS_LOADER, null, this);
 
 //        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 //        mSharedPreferences.registerOnSharedPreferenceChangeListener(this);
@@ -111,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements
     public Loader<Cursor> onCreateLoader(int loaderId, @Nullable Bundle bundle) {
         switch (loaderId) {
 
-            case ID_FORECAST_LOADER:
+            case ID_INSECTS_LOADER:
                 /* URI for all rows of weather data in our weather table */
                 Uri forecastQueryUri = InsectContract.WeatherEntry.CONTENT_URI;
                 String sortOrder = InsectContract.WeatherEntry.COLUMN_FRIENDLY_NAME + " ASC";
@@ -141,6 +141,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(int id) {
-
+        Intent intent = new Intent(this, InsectDetailsActivity.class);
+        intent.putExtra(InsectDetailsActivity.EXTRA_INSECT_ID, id);
+        startActivity(intent);
     }
 }

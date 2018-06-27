@@ -1,7 +1,11 @@
 package com.google.developer.bugmaster.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.support.annotation.NonNull;
 
 /**
  * Singleton that controls access to the SQLiteDatabase instance
@@ -24,25 +28,49 @@ public class DatabaseManager {
         mBugsDbHelper = new BugsDbHelper(context);
     }
 
-    /**
-     * Return a {@link Cursor} that contains every insect in the database.
-     *
-     * @param sortOrder Optional sort order string for the query, can be null
-     * @return {@link Cursor} containing all insect results.
-     */
-    public Cursor queryAllInsects(String sortOrder) {
-        //TODO: Implement the query
-        return null;
+    public int bulkInsert(Context context, @NonNull Uri uri, @NonNull ContentValues[] values) {
+        final SQLiteDatabase db = mBugsDbHelper.getWritableDatabase();
+        db.beginTransaction();
+        int rowsInserted = 0;
+        try {
+            for (ContentValues value : values) {
+                long _id = db.insert(InsectContract.WeatherEntry.TABLE_NAME, null, value);
+                if (_id != -1) {
+                    rowsInserted++;
+                }
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+
+        if (rowsInserted > 0) {
+            context.getContentResolver().notifyChange(uri, null);
+        }
+
+        return rowsInserted;
     }
 
-    /**
-     * Return a {@link Cursor} that contains a single insect for the given unique id.
-     *
-     * @param id Unique identifier for the insect record.
-     * @return {@link Cursor} containing the insect result.
-     */
-    public Cursor queryInsectsById(int id) {
-        //TODO: Implement the query
-        return null;
+    public Cursor queryAllInsects(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        return mBugsDbHelper.getReadableDatabase().query(
+                InsectContract.WeatherEntry.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder);
+    }
+
+
+    public Cursor queryInsectsById(String[] projection, String[] selectionArgs) {
+        return mBugsDbHelper.getReadableDatabase().query(
+                InsectContract.WeatherEntry.TABLE_NAME,
+                projection,
+                InsectContract.WeatherEntry._ID + " = ? ",
+                selectionArgs,
+                null,
+                null,
+                null);
     }
 }
